@@ -1,7 +1,16 @@
-pandas
-flask
+numpy 
+pandas 
 dvc
-pylint
 notebook
-pymongo
-mlflow
+matplotlib
+seaborn
+pyton-box
+pyYAML
+tqdm
+ensure
+joblib
+types-PyYAML
+scipy
+Flask
+Flask-Cors
+-e .
