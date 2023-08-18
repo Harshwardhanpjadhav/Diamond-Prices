@@ -11,18 +11,19 @@ AUTHOR_USER_NAME = "Harshwardhanpjadhav"
 SRC_REPO = "UberFares"
 AUTHOR_EMAIL = "harshwardhanpj2001@gmail.com"
 
+
 setuptools.setup(
-    name=REPO_NAME,
+    name=SRC_REPO,
     version=__version__,
     author=AUTHOR_USER_NAME,
     author_email=AUTHOR_EMAIL,
     description="Uber Fares Price Prediction",
     long_description=long_description,
-    long_description_content_type="text/markdown",
+    long_description_content="text/markdown",
     url=f"https://github.com/{AUTHOR_USER_NAME}/{REPO_NAME}",
     project_urls={
-        "Bug Tracker": f"https://github.com//{AUTHOR_USER_NAME}/{REPO_NAME}/issues"
+        "Bug Tracker": f"https://github.com/{AUTHOR_USER_NAME}/{REPO_NAME}/issues",
     },
-    package_dir=("","src"),
-    packages=setuptools.find_packages(where="src"),
+    package_dir={"": "src"},
+    packages=setuptools.find_packages(where="src")
 )
