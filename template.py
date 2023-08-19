@@ -3,17 +3,19 @@ from pathlib import Path
 import logging
 
 logging.basicConfig(
-                    level=logging.INFO,
-                    format='%(asctime)s %(levelname)s %(message)s',
-                    datefmt='%Y-%m-%d %H:%M:%S',
-                    filemode='w'
-                    )
+    level=logging.INFO,
+    format='%(asctime)s %(levelname)s %(message)s',
+    datefmt='%Y-%m-%d %H:%M:%S',
+    filemode='w'
+)
 
 project_name = "UberFares"
 
 list_of_files = [
     ".github/workflows/.gitkeep",
     f"src/{project_name}/__init__.py",
+    f"src/{project_name}/components/__init__.py",
+    f"src/{project_name}/components/__init__.py",
     f"src/{project_name}/components/__init__.py",
     f"src/{project_name}/utils/__init__.py",
     f"src/{project_name}/config/__init__.py",
@@ -30,7 +32,6 @@ list_of_files = [
     "research/trails.ipynb"
 
 ]
-
 
 
 for filepath in list_of_files:
