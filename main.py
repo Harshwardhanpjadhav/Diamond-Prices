@@ -6,3 +6,4 @@ import os,sys
 
 if __name__ == '__main__':
     a=MongodbClient()
+    print(a.database_name)
