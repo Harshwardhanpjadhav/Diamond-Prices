@@ -16,4 +16,5 @@ Flask
 Flask-Cors
 pymongo
 pymongo[srv]==4.2.0
+python-dotenv
 -e .

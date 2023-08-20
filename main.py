@@ -5,4 +5,4 @@ from src.UberFares.logger import logging
 import os,sys
 
 if __name__ == '__main__':
-    logging.info("everything is fine")
+    a=MongodbClient()

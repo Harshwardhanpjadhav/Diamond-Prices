@@ -1,5 +1,9 @@
+from dotenv import find_dotenv,load_dotenv
 import pymongo
 import certifi
+import os
+dotenv_path = find_dotenv()
+load_dotenv(dotenv_path)
 
 # Import database_name and collection_name form constant package
 from src.UberFares.constants.database_name import DATABASE_NAME, COLLECTION_NAME
@@ -13,7 +17,7 @@ class MongodbClient:
     def __init__(self, database_name=DATABASE_NAME) -> None:
         try:
             if MongodbClient.client is None:
-                mongo_url = "mongodb+srv://harsh:harsh@cluster0.aeotez0.mongodb.net/?retryWrites=true&w=majority"
+                mongo_url = os.getenv('MONGO_DB_URL')
                 MongodbClient.client = pymongo.MongoClient(
                     mongo_url, tlsCAFile=certifi.where())
             self.client = MongodbClient.client
