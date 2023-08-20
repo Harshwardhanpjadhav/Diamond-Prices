@@ -11,7 +11,6 @@ from src.UberFares.constants.database_name import DATABASE_NAME, COLLECTION_NAME
 # Creating a class for mongodb connection
 class MongodbClient:
     client = None
-
     def __init__(self, database_name=DATABASE_NAME) -> None:
         try:
             mymongo_url = EnvironmentVariable.mongo_url
