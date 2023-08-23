@@ -7,7 +7,7 @@ PIPELINE_NAME: str ='uber'
 # Name of the artifact DIR
 ARTIFACT_DIR: str = 'artifact'
 # Dataset file constant name
-FILE_NAME: str = 'uber.scv'
+FILE_NAME: str = 'uber.csv'
 
 # Train File constant name
 TRAIN_FILE_NAME: str = "train.csv"
@@ -25,8 +25,8 @@ SCHEMA_FILE_PATH = os.path.join("config","schema.yaml")
 SCHEMA_DROP_COLUMNS= 'drop_columns'
 
 # Data ingestion constant
-DATA_INGESTION_COLLECTION_NAME:str = "uber"
+DATA_INGESTION_COLLECTION_NAME:str = "uberfareprice"
 DATA_INGESTION_DIR_NAME:str = "data_ingestion"
 DATA_INGESTION_FEATURE_STORE_DIR:str = "feature_store"
 DATA_INGESTION_INGESTED_DIR:str = "ingested"
-DATA_INGESTION_TRAIN_TEST_SPLIT_RATIO:str="0.2"
+DATA_INGESTION_TRAIN_TEST_SPLIT_RATIO:float=0.2

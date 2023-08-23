@@ -1,2 +1,2 @@
 DATABASE_NAME = "uber"
-COLLECTION_NAME = "uberfaresprice"
+COLLECTION_NAME = "uberfareprice"

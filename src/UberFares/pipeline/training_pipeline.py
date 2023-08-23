@@ -3,6 +3,7 @@ from src.UberFares.logger import logging
 from src.UberFares.exception import CustomException
 import sys,os
 from src.UberFares.entity.artifact import DataIngestionArtifact
+from src.UberFares.components.data_ingestion import DataIngestion
 
 class TrainingPipeline:
     '''
@@ -14,8 +15,11 @@ class TrainingPipeline:
 
     def start_data_ingestion(self)->DataIngestionArtifact:
         try:
-            logging.info("startes data ingestion")
-            logging.info("completed data ingestion")
+            logging.info("Started Data Ingestion>>>>>")
+            data_ingestion = DataIngestion(data_ingestion_config=self.data_ingestion_config)
+            data_ingestion_artifact = data_ingestion.initiate_data_ingestion()
+            logging.info(f"Completed Data Ingestion {data_ingestion_artifact}")
+            return data_ingestion_artifact
         except Exception as e:
             raise CustomException(e,sys)
         

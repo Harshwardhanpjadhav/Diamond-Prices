@@ -28,9 +28,9 @@ class UberData:
             return pd.DataFrame of collection
             """
             if database_name is None:
-                collection = self.mongo_client.database[collection_name]
+                collection = self.mongodb_client.database[collection_name]
             else:
-                collection = self.mongo_client[database_name][collection_name]
+                collection = self.mongodb_client[database_name][collection_name]
             df = pd.DataFrame(list(collection.find()))
 
             if "_id" in df.columns.to_list():
