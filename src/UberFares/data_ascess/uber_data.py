@@ -3,7 +3,7 @@ import sys
 from typing import Optional
 from src.UberFares.exception import CustomException
 from src.UberFares.logger import logging
-from src.UberFares.constants.database_name import DATABASE_NAME, COLLECTION_NAME
+from src.UberFares.constants.database_name import DATABASE_NAME
 from src.UberFares.constants.env_variable import EnvironmentVariable as EV
 from src.UberFares.configuration.mongo_conn import MongodbClient
 import pandas as pd
@@ -36,6 +36,7 @@ class UberData:
             if "_id" in df.columns.to_list():
                 df = df.drop(columns=["_id"], axis=1)
 
+                
             df.replace({"na": np.nan}, inplace=True)
             df.replace({0: np.nan}, inplace=True)
 
