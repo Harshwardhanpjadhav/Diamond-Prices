@@ -6,28 +6,25 @@ TAREGT_COLUMN_NAME: str = 'fare_amount'
 PIPELINE_NAME: str ='uber'
 # Name of the artifact DIR
 ARTIFACT_DIR: str = 'artifact'
-# Dataset file name
+# Dataset file constant name
 FILE_NAME: str = 'uber.scv'
 
-# Train File name
+# Train File constant name
 TRAIN_FILE_NAME: str = "train.csv"
-# Test File name
+# Test File constant name
 TEST_FILE_NAME: str = "test.csv"
  
-# Preprocessing PKL file name
+# Preprocessing PKL constant file name
 PREPROCESSING_PIPELINE_OBJECT = "preprocessing.pkl"
 
-# Model PKL file name
+# Model PKL file constant name
 MODEL_FILE_NAME = "model.pkl"
 
-# Schema file path
+# Schema file path constant
 SCHEMA_FILE_PATH = os.path.join("config","schema.yaml")
-
-#
 SCHEMA_DROP_COLUMNS= 'drop_columns'
 
-# Data ingestion 
-
+# Data ingestion constant
 DATA_INGESTION_COLLECTION_NAME:str = "uber"
 DATA_INGESTION_DIR_NAME:str = "data_ingestion"
 DATA_INGESTION_FEATURE_STORE_DIR:str = "feature_store"
