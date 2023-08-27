@@ -1,6 +1,7 @@
 from src.UberFares.constants.trainingpipeline import SCHEMA_FILE_PATH
 from src.UberFares.entity.artifact import DataIngestionArtifact, DataValidationArtifact
 from src.UberFares.entity.config import DataValidationConfig
+from src.UberFares.utils.main_util import write_yaml_file,read_yaml_file
 from src.UberFares.logger import logging
 import pandas as pd
 import os
@@ -13,6 +14,7 @@ class DataValidation:
         try:
             self.data_ingestion_artifact = data_ingestion_artifact
             self.data_validation_config = data_validation_config
+            self._schema_config = read_yaml_file(SCHEMA_FILE_PATH)
         except Exception as e:
             raise CustomException(e, sys)
 
@@ -23,15 +25,16 @@ class DataValidation:
         except Exception as e:
             raise CustomException(e, sys)
 
-    def is_numeric_columns_exist(self) -> bool:
-        pass 
+    def is_numeric_columns_exist(self,dataframe:pd.DataFrame) -> bool:
+        numeric_col = self._schema_config('numeric_col')
+        pass
 
     def validate_no_of_columns(self,dataframe=pd.DataFrame) -> bool:
         try:
-            no_of_columns = 6
-            if len(dataframe.columns) == no_of_columns:
-                return True
-            return False
+            no_of_col =  self._schema_config('columns')
+            if len(dataframe.columns) == no_of_col:
+                return True 
+            return False 
         except Exception as e:
             raise CustomException(e, sys)
 
