@@ -2,7 +2,7 @@ from src.diamond.entity.config import TrainingPipelineConfig,DataIngestionConfig
 from src.diamond.logger import logging
 from src.diamond.exception import CustomException
 import sys,os
-from src.diamond.entity.artifact import DataIngestionArtifact
+from src.diamond.entity.artifact import DataIngestionArtifact,DataValidationArtifact
 from src.diamond.components.data_ingestion import DataIngestion
 
 class TrainingPipeline:
@@ -15,7 +15,7 @@ class TrainingPipeline:
 
     def start_data_ingestion(self)->DataIngestionArtifact:
         try:
-            logging.info("Started Data Ingestion>>>>>")
+            logging.info("Started Data Ingestion >>>>>")
             data_ingestion = DataIngestion(data_ingestion_config=self.data_ingestion_config)
             data_ingestion_artifact = data_ingestion.initiate_data_ingestion()
             logging.info(f"Completed Data Ingestion {data_ingestion_artifact}")
@@ -25,7 +25,7 @@ class TrainingPipeline:
         
     def start_data_validation(self):
         try:
-            pass 
+            logging.info("Started Data Validation >>>>>") 
         except Exception as e:
             raise CustomException(e,sys)
 
@@ -55,5 +55,7 @@ class TrainingPipeline:
     def run_pipeline(self):
         try:
             data_ingestion_artifact:DataIngestionArtifact= self.start_data_ingestion()
+            data_validation_artifact:DataValidationArtifact= self.start_data_validation()
+
         except Exception as e:
             raise CustomException(e,sys) 
