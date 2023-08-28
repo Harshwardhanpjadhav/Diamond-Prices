@@ -1,13 +1,13 @@
 import os
 
 # Target column name form dataset
-TAREGT_COLUMN_NAME: str = 'fare_amount'
+TAREGT_COLUMN_NAME: str = 'price'
 # Name of the pipeline
-PIPELINE_NAME: str ='uber'
+PIPELINE_NAME: str ='diamond'
 # Name of the artifact DIR
 ARTIFACT_DIR: str = 'artifact'
 # Dataset file constant name
-FILE_NAME: str = 'uber.csv'
+FILE_NAME: str = 'DiamondPricesData.csv'
 
 # Train File constant name
 TRAIN_FILE_NAME: str = "train.csv"
@@ -25,7 +25,7 @@ SCHEMA_FILE_PATH = os.path.join("config","schema.yaml")
 SCHEMA_DROP_COLUMNS= 'drop_columns'
 
 # Data ingestion constant
-DATA_INGESTION_COLLECTION_NAME:str = "uberfareprice"
+DATA_INGESTION_COLLECTION_NAME:str = "DiamondPricesData"
 DATA_INGESTION_DIR_NAME:str = "data_ingestion"
 DATA_INGESTION_FEATURE_STORE_DIR:str = "feature_store"
 DATA_INGESTION_INGESTED_DIR:str = "ingested"

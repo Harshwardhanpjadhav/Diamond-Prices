@@ -4,7 +4,7 @@ from src.diamond.exception import CustomException
 from src.diamond.logger import logging
 from src.diamond.entity.config import DataIngestionConfig
 from src.diamond.entity.artifact import DataIngestionArtifact
-from src.diamond.data_ascess.uber_data import UberData
+from diamond.data_ascess.diamond_data_access import UberData
 from pandas import DataFrame
 from sklearn.model_selection import train_test_split
 

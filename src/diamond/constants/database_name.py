@@ -1,2 +1,2 @@
-DATABASE_NAME = "uber"
-COLLECTION_NAME = "uberfareprice"
+DATABASE_NAME = "data"
+COLLECTION_NAME = "DiamondPricesData"
