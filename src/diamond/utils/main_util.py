@@ -1,8 +1,8 @@
 import yaml
 import os,sys
 
-from src.UberFares.logger import logging
-from src.UberFares.exception import CustomException
+from src.diamond.logger import logging
+from src.diamond.exception import CustomException
 
 
 def read_yaml_file(file_path:str)->dict:

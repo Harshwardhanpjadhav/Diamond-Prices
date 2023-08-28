@@ -1,10 +1,10 @@
 import os
 import sys
-from src.UberFares.exception import CustomException
-from src.UberFares.logger import logging
-from src.UberFares.entity.config import DataIngestionConfig
-from src.UberFares.entity.artifact import DataIngestionArtifact
-from src.UberFares.data_ascess.uber_data import UberData
+from src.diamond.exception import CustomException
+from src.diamond.logger import logging
+from src.diamond.entity.config import DataIngestionConfig
+from src.diamond.entity.artifact import DataIngestionArtifact
+from src.diamond.data_ascess.uber_data import UberData
 from pandas import DataFrame
 from sklearn.model_selection import train_test_split
 

@@ -9,7 +9,7 @@ logging.basicConfig(
     filemode='w'
 )
 
-project_name = "UberFares"
+project_name = "diamond"
 
 list_of_files = [
     ".github/workflows/.gitkeep",

@@ -1,7 +1,7 @@
-from src.UberFares.configuration.mongo_conn import MongodbClient
-from src.UberFares.exception import CustomException
-from src.UberFares.logger import logging
-from src.UberFares.pipeline.training_pipeline import TrainingPipeline
+from src.diamond.configuration.mongo_conn import MongodbClient
+from src.diamond.exception import CustomException
+from src.diamond.logger import logging
+from src.diamond.pipeline.training_pipeline import TrainingPipeline
 
 import os,sys
 

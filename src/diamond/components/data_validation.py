@@ -1,12 +1,12 @@
-from src.UberFares.constants.trainingpipeline import SCHEMA_FILE_PATH
-from src.UberFares.entity.artifact import DataIngestionArtifact, DataValidationArtifact
-from src.UberFares.entity.config import DataValidationConfig
-from src.UberFares.utils.main_util import write_yaml_file,read_yaml_file
-from src.UberFares.logger import logging
+from src.diamond.constants.trainingpipeline import SCHEMA_FILE_PATH
+from src.diamond.entity.artifact import DataIngestionArtifact, DataValidationArtifact
+from src.diamond.entity.config import DataValidationConfig
+from src.diamond.utils.main_util import write_yaml_file,read_yaml_file
+from src.diamond.logger import logging
 import pandas as pd
 import os
 import sys
-from src.UberFares.exception import CustomException
+from src.diamond.exception import CustomException
 
 
 class DataValidation:

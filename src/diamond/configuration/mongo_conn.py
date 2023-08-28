@@ -1,10 +1,10 @@
 import pymongo
 import certifi
 import os
-from src.UberFares.constants.env_variable import EnvironmentVariable
+from src.diamond.constants.env_variable import EnvironmentVariable
 
 # Import database_name and collection_name form constant package
-from src.UberFares.constants.database_name import DATABASE_NAME, COLLECTION_NAME
+from src.diamond.constants.database_name import DATABASE_NAME, COLLECTION_NAME
 
 
 

@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from datetime import datetime
 import os
-from src.UberFares.constants import trainingpipeline as tp
+from src.diamond.constants import trainingpipeline as tp
 
 class TrainingPipelineConfig:
     def __init__(self,timestamp=datetime.now()):

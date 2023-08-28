@@ -1,9 +1,9 @@
-from src.UberFares.entity.config import TrainingPipelineConfig,DataIngestionConfig
-from src.UberFares.logger import logging
-from src.UberFares.exception import CustomException
+from src.diamond.entity.config import TrainingPipelineConfig,DataIngestionConfig
+from src.diamond.logger import logging
+from src.diamond.exception import CustomException
 import sys,os
-from src.UberFares.entity.artifact import DataIngestionArtifact
-from src.UberFares.components.data_ingestion import DataIngestion
+from src.diamond.entity.artifact import DataIngestionArtifact
+from src.diamond.components.data_ingestion import DataIngestion
 
 class TrainingPipeline:
     '''

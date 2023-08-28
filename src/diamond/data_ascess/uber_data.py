@@ -1,11 +1,11 @@
 import os
 import sys
 from typing import Optional
-from src.UberFares.exception import CustomException
-from src.UberFares.logger import logging
-from src.UberFares.constants.database_name import DATABASE_NAME
-from src.UberFares.constants.env_variable import EnvironmentVariable as EV
-from src.UberFares.configuration.mongo_conn import MongodbClient
+from src.diamond.exception import CustomException
+from src.diamond.logger import logging
+from src.diamond.constants.database_name import DATABASE_NAME
+from src.diamond.constants.env_variable import EnvironmentVariable as EV
+from src.diamond.configuration.mongo_conn import MongodbClient
 import pandas as pd
 import numpy as np
 
