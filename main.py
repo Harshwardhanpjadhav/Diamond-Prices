@@ -3,6 +3,8 @@ from src.diamond.exception import CustomException
 from src.diamond.logger import logging
 from src.diamond.pipeline.training_pipeline import TrainingPipeline
 
+import os,sys
+
 if __name__ == '__main__':
     t = TrainingPipeline()
     t.run_pipeline()
