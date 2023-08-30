@@ -10,7 +10,7 @@ from src.diamond.entity.artifact import DataIngestionArtifact, DataValidationArt
 
 
 class DataValidation:
-    def __init__(self,data_ingestion_artifact:DataIngestionArtifact,
+    def __init__(self, data_ingestion_artifact: DataIngestionArtifact,
                  data_validation_config=DataValidationConfig):
         try:
             self.data_ingestion_artifact = data_ingestion_artifact
@@ -20,14 +20,14 @@ class DataValidation:
             raise CustomException(e, sys)
 
     @staticmethod
-    def read_data(file_path)->pd.DataFrame:
+    def read_data(file_path) -> pd.DataFrame:
         logging.info("Startes reading Data")
         try:
             return pd.read_csv(file_path)
         except Exception as e:
-            raise CustomException(e,sys)
+            raise CustomException(e, sys)
 
-    def validate_no_of_columns(self,dataframe=pd.DataFrame) -> bool:
+    def validate_no_of_columns(self, dataframe=pd.DataFrame) -> bool:
         try:
             logging.info("Started Validating Number of columns >>>>>>")
             no_of_col = len(self._schema_config['columns'])
@@ -38,10 +38,9 @@ class DataValidation:
                 return True
             logging.info("calidation no of cloumns complete")
             return False
-            
+
         except Exception as e:
             raise CustomException(e, sys)
-        
 
     def is_numeric_columns_exist(self, dataframe: pd.DataFrame) -> bool:
         try:
@@ -51,18 +50,17 @@ class DataValidation:
 
             numerical_column_present = True
             missing_numerical_col = []
-            
+
             for num_col in numeric_col:
                 if num_col not in dataframe_columns:
                     numerical_column_present = False
                     missing_numerical_col.append(num_col)
-                    
+
             logging.info(f"Missing numerical columns: {missing_numerical_col}")
 
             return numerical_column_present
         except Exception as e:
-            raise CustomException(e,sys)
-    
+            raise CustomException(e, sys)
 
     def is_categorical_columns_exist(self, dataframe: pd.DataFrame) -> bool:
         logging.info("Started validating Categorical Col Exists >>>>>")
@@ -84,7 +82,7 @@ class DataValidation:
     def initiate_data_validation(self) -> DataValidationArtifact:
         try:
 
-            error_message=""
+            error_message = ""
 
             train_file_path = self.data_ingestion_artifact.trained_file_path
             test_file_path = self.data_ingestion_artifact.test_file_path
@@ -116,7 +114,7 @@ class DataValidation:
                 error_message = f"Train Datase Does not contain all numeric columns"
             else:
                 logging.info("Train dataset contains all numeric columns")
-        
+
             status = self.is_numeric_columns_exist(dataframe=test_dataframe)
             if not status:
                 error_message = f"Train Datase Does not contain all numeric columns"
@@ -125,21 +123,22 @@ class DataValidation:
 
             # is_categorical_columns_exist
             logging.info("------ is_categorical_columns_exist --------")
-            status = self.is_categorical_columns_exist(dataframe=train_dataframe)
+            status = self.is_categorical_columns_exist(
+                dataframe=train_dataframe)
             if not status:
                 error_message = f"Train Datase Does not contain all categorical columns"
             else:
                 logging.info("Train dataset contains all categorical columns")
 
-            status = self.is_categorical_columns_exist(dataframe=test_dataframe)
+            status = self.is_categorical_columns_exist(
+                dataframe=test_dataframe)
             if not status:
                 error_message = f"Train Datase Does not contain all categorical columns"
             else:
                 logging.info("Test dataset contains all categorical columns")
-            
+
             if len(error_message) > 0:
                 raise Exception(error_message)
-
 
         except Exception as e:
             raise CustomException(e, sys)
