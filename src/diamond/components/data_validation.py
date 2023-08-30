@@ -21,7 +21,7 @@ class DataValidation:
 
     @staticmethod
     def read_data(file_path)->pd.DataFrame:
-        logging.info("data read succesfull")
+        logging.info("Startes reading Data")
         try:
             return pd.read_csv(file_path)
         except Exception as e:
@@ -29,6 +29,7 @@ class DataValidation:
 
     def validate_no_of_columns(self,dataframe=pd.DataFrame) -> bool:
         try:
+            logging.info("Started Validating Number of columns >>>>>>")
             no_of_col = len(self._schema_config['columns'])
             logging.info(f"Required number of columns: {no_of_col}")
             logging.info(f"Data frame has columns: {len(dataframe.columns)}")
@@ -44,6 +45,7 @@ class DataValidation:
 
     def is_numeric_columns_exist(self, dataframe: pd.DataFrame) -> bool:
         try:
+            logging.info("Started validating Numeric Col Exists >>>>>>>>>>>>")
             numeric_col = self._schema_config['numeric_columns']
             dataframe_columns = dataframe.columns
 
@@ -63,6 +65,7 @@ class DataValidation:
     
 
     def is_categorical_columns_exist(self, dataframe: pd.DataFrame) -> bool:
+        logging.info("Started validating Categorical Col Exists >>>>>")
         cat_col = self._schema_config['categorical_columns']
         df_columns = dataframe.columns
         cat_col_present = True
@@ -80,39 +83,59 @@ class DataValidation:
 
     def initiate_data_validation(self) -> DataValidationArtifact:
         try:
+
             error_message=""
 
             train_file_path = self.data_ingestion_artifact.trained_file_path
             test_file_path = self.data_ingestion_artifact.test_file_path
 
+            logging.info("------ Calling Read Data --------")
             train_dataframe = DataValidation.read_data(train_file_path)
+            logging.info("Train Data Read sccessfull")
             test_dataframe = DataValidation.read_data(test_file_path)
+            logging.info("Test Data Read sccessfull")
 
+            logging.info("------ validate_no_of_columns --------")
             status = self.validate_no_of_columns(dataframe=train_dataframe)
             if not status:
                 error_message = f"Train Datase Does not contain all columns"
+            else:
+                logging.info("Train dataset contains all columns")
 
             status = self.validate_no_of_columns(dataframe=test_dataframe)
             if not status:
                 error_message = f"test Datase Does not contain all columns"
 
+            else:
+                logging.info("Test dataset contains all columns")
+
             # is_numeric_columns_exist
+            logging.info("------ is_numeric_columns_exist --------")
             status = self.is_numeric_columns_exist(dataframe=train_dataframe)
             if not status:
                 error_message = f"Train Datase Does not contain all numeric columns"
+            else:
+                logging.info("Train dataset contains all numeric columns")
         
             status = self.is_numeric_columns_exist(dataframe=test_dataframe)
             if not status:
                 error_message = f"Train Datase Does not contain all numeric columns"
+            else:
+                logging.info("Test dataset contains all numeric columns")
 
             # is_categorical_columns_exist
+            logging.info("------ is_categorical_columns_exist --------")
             status = self.is_categorical_columns_exist(dataframe=train_dataframe)
             if not status:
                 error_message = f"Train Datase Does not contain all categorical columns"
+            else:
+                logging.info("Train dataset contains all categorical columns")
 
             status = self.is_categorical_columns_exist(dataframe=test_dataframe)
             if not status:
                 error_message = f"Train Datase Does not contain all categorical columns"
+            else:
+                logging.info("Test dataset contains all categorical columns")
             
             if len(error_message) > 0:
                 raise Exception(error_message)
