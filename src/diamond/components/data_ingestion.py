@@ -64,7 +64,8 @@ class DataIngestion:
             self.train_test_split(dataframe=dataframee)
 
             data_ingestion_artifact = DataIngestionArtifact(
-                trained_file_path=self.data_ingestion_config.training_file_path, test_file_path=self.data_ingestion_config.testing_file_path)
+                trained_file_path=self.data_ingestion_config.training_file_path,
+                test_file_path=self.data_ingestion_config.testing_file_path)
             return data_ingestion_artifact
         except Exception as e:
             raise CustomException(e, sys)
