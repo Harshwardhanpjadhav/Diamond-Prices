@@ -46,6 +46,7 @@ class TrainingPipeline:
             pass
         except Exception as e:
             raise CustomException(e,sys)
+        
     def start_model_evaluation(self):
         try:
             pass
