@@ -19,7 +19,7 @@ class CustomException(Exception):
     This class is used to raise custom exception
     '''
 
-    def __init__(self, error_message, error_detail:sys):
+    def __init__(self, error_message, error_detail: sys):
         '''
         This function will initialize the error message
         '''

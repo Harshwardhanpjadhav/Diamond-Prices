@@ -36,7 +36,6 @@ class UberData:
             if "_id" in df.columns.to_list():
                 df = df.drop(columns=["_id"], axis=1)
 
-                
             df.replace({"na": np.nan}, inplace=True)
             df.replace({0: np.nan}, inplace=True)
 

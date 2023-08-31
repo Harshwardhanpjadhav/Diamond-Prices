@@ -30,7 +30,7 @@ class DataIngestion:
         except Exception as e:
             raise CustomException(e, sys)
 
-    def train_test_split(self, dataframe:DataFrame):
+    def train_test_split(self, dataframe: DataFrame):
         try:
             train_set, test_set = train_test_split(
                 dataframe, test_size=self.data_ingestion_config.train_test_split_ratio)
