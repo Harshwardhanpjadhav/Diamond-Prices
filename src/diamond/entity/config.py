@@ -53,3 +53,7 @@ class DataValidationConfig:
             self.drift_report_file, tp.DATA_VALIDATION_DRIFT_REPORT_FILE_NAME_CAT)
         self.drift_report_file_num: str = os.path.join(
             self.drift_report_file, tp.DATA_VALIDATION_DRIFT_REPORT_FILE_NAME_NUM)
+
+
+
+class DataTransformationConfig:...

@@ -38,3 +38,15 @@ DATA_VALIDATION_INVALID_DIR_NAME: str = "invalid"
 DATA_VALIDATION_DRIFT_REPORT_DIR_NAME: str = "drift_report"
 DATA_VALIDATION_DRIFT_REPORT_FILE_NAME_CAT: str = "cat_report.yaml"
 DATA_VALIDATION_DRIFT_REPORT_FILE_NAME_NUM: str = "num_report.yaml"
+
+
+# Data Transforamtion Constant
+DATA_TRANSFORMATION_DIR_NAME:str = 'data_transformation'
+DATA_TRASNFORMATION_TRANSFORMED_DATA_DIR:str = 'transformed'
+DATA_TRASNFORMATION_TRANSFORMED_DATA_OBJECT_DIR:str = 'transformed_object'
+
+
+
+
+
+
