@@ -1,6 +1,7 @@
 import yaml
 import os
 import sys
+import dill
 import pandas as pd
 from src.diamond.logger import logging
 from src.diamond.exception import CustomException
@@ -36,7 +37,7 @@ def numerical_col(df: pd.DataFrame) -> pd.DataFrame:
         df = df[num_col]
         return df
     except Exception as e:
-        raise e
+        raise CustomException(sys,e)
 
 
 def categorical_col(df: pd.DataFrame) -> pd.DataFrame:
@@ -47,4 +48,15 @@ def categorical_col(df: pd.DataFrame) -> pd.DataFrame:
         df = df[cat_col]
         return df
     except Exception as e:
-        raise e
+        raise CustomException(sys,e)
+
+
+
+def save_preprocessing_object(file_path:str,obj:object)->None:
+    try:
+        os.makedirs(os.path.dirname(file_path),exist_ok=True)
+        with open(file_path,'wb') as file_obj:
+            dill.dump(obj,file_obj)
+
+    except Exception as e:
+        raise CustomException(sys,e)
