@@ -74,8 +74,8 @@ class DataTransformation:
             input_train = train.drop(columns=[TAREGT_COLUMN_NAME,'y','z','depth','table'],axis=1)
             input_test = test.drop(columns=[TAREGT_COLUMN_NAME,'y','z','depth','table'],axis=1)
 
-            output_train = train[[TAREGT_COLUMN_NAME]]
-            output_test = test[[TAREGT_COLUMN_NAME]]
+            output_train = train[TAREGT_COLUMN_NAME]
+            output_test = test[TAREGT_COLUMN_NAME]
 
             input_feature_train = preprocessor.fit_transform(input_train)
             input_feature_test = preprocessor.transform(input_test)
