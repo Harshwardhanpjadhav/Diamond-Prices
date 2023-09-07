@@ -10,7 +10,7 @@ import pandas as pd
 import numpy as np
 
 
-class UberData:
+class GetDiamondData:
     '''
     This class is used to fetch Data from MongoDB and return Dataframe
     '''

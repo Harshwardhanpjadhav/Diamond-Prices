@@ -4,7 +4,7 @@ from src.diamond.exception import CustomException
 from src.diamond.logger import logging
 from src.diamond.entity.config import DataIngestionConfig
 from src.diamond.entity.artifact import DataIngestionArtifact
-from diamond.data_ascess.diamond_data_access import UberData
+from src.diamond.data_ascess.diamond_data_access import GetDiamondData
 from pandas import DataFrame
 from sklearn.model_selection import train_test_split
 
@@ -18,8 +18,8 @@ class DataIngestion:
 
     def export_data_to_feature_store(slef) -> DataFrame:
         try:
-            uber_data = UberData()
-            dataframe = uber_data.export_collection_as_dataframe(
+            diamond = GetDiamondData()
+            dataframe = diamond.export_collection_as_dataframe(
                 collection_name=slef.data_ingestion_config.collection_name)
             feature_store_file_path = slef.data_ingestion_config.feature_store_file_path
             dir_path = os.path.dirname(feature_store_file_path)

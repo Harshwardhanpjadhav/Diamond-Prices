@@ -6,9 +6,9 @@ with open("README.md", "r", encoding="utf-8") as f:
 
 __version__ = "0.0.0"
 
-REPO_NAME = "Uber-Fares-Price"
+REPO_NAME = "Diamond-Prices"
 AUTHOR_USER_NAME = "Harshwardhanpjadhav"
-SRC_REPO = "UberFares"
+SRC_REPO = "diamond"
 AUTHOR_EMAIL = "harshwardhanpj2001@gmail.com"
 
 
