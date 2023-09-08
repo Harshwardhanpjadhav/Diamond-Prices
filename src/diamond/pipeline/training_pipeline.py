@@ -8,8 +8,8 @@ from src.diamond.components.data_transformation import DataTransformation
 from src.diamond.components.model_evaluation import ModelEvaluation
 from src.diamond.components.model_pusher import ModelPusher
 from src.diamond.components.model_trainer import ModelTrainer
-from src.diamond.entity.artifact import DataIngestionArtifact, DataValidationArtifact, DataTransformationArtifact, ModelTrainerArtifact,ModelEvaluationArtifact,ModelPusherArtifact
-from src.diamond.entity.config import TrainingPipelineConfig, DataIngestionConfig, DataValidationConfig, DataTransformationConfig, ModelTrainerConfig,ModelEvaluationConfig,ModelPusherConfig
+from src.diamond.entity.artifact import DataIngestionArtifact, DataValidationArtifact, DataTransformationArtifact, ModelTrainerArtifact, ModelEvaluationArtifact, ModelPusherArtifact
+from src.diamond.entity.config import TrainingPipelineConfig, DataIngestionConfig, DataValidationConfig, DataTransformationConfig, ModelTrainerConfig, ModelEvaluationConfig, ModelPusherConfig
 
 
 class TrainingPipeline:
@@ -31,10 +31,10 @@ class TrainingPipeline:
 
         self.model_trainer_config = ModelTrainerConfig(
             training_pipeline_config=training_pipeline_config)
-        
+
         self.model_evaluation_config = ModelEvaluationConfig(
-             training_pipeline_config=training_pipeline_config)
-        
+            training_pipeline_config=training_pipeline_config)
+
         self.model_pusher_config = ModelPusherConfig(
             training_pipeline_config=training_pipeline_config)
 
@@ -54,6 +54,7 @@ class TrainingPipeline:
     def start_data_validation(self, data_ingetion_artifact: DataIngestionArtifact) -> DataValidationArtifact:
         try:
             logging.info("Started Data Validation >>>>>")
+            logging.info(data_ingetion_artifact)
             data_validation = DataValidation(
                 data_ingetion_artifact,
                 data_validation_config=self.data_validation_config)
@@ -90,7 +91,7 @@ class TrainingPipeline:
         except Exception as e:
             raise CustomException(e, sys)
 
-    def start_model_evaluation(self,model_trainer_artifact:ModelTrainerArtifact,data_validation_artifact:DataValidationArtifact)->ModelEvaluationArtifact:
+    def start_model_evaluation(self, model_trainer_artifact: ModelTrainerArtifact, data_validation_artifact: DataValidationArtifact) -> ModelEvaluationArtifact:
         try:
             logging.info("Started  start_model_evaluation >>>>>")
 
@@ -98,16 +99,16 @@ class TrainingPipeline:
                 model_trainer_artifact,
                 data_validation_artifact,
                 model_evaluation_config=self.model_evaluation_config
-                )
+            )
             model_evaluation_artifact = model_evaluation.initiate_model_evaluation()
             return model_evaluation_artifact
         except Exception as e:
             raise CustomException(e, sys)
 
-    def start_model_pusher(self,model_eval_artifact:ModelEvaluationArtifact)->ModelPusherArtifact:
+    def start_model_pusher(self, model_eval_artifact: ModelEvaluationArtifact) -> ModelPusherArtifact:
         try:
             model_pusher = ModelPusher(self.model_pusher_config,
-                                        model_eval_artifact)
+                                       model_eval_artifact)
             model_pusher_artifact = model_pusher.initiate_model_pusher()
 
             return model_pusher_artifact
@@ -126,16 +127,15 @@ class TrainingPipeline:
 
             model_trainer_artifact = self.start_model_trainer(
                 data_transformation_artifact=data_transformation_artifact)
-            
+
             model_evaluation_artifact = self.start_model_evaluation(
                 model_trainer_artifact=model_trainer_artifact,
                 data_validation_artifact=data_validation_artifact
-                )
-            
+            )
+
             model_pusher_artifact = self.start_model_pusher(
                 model_eval_artifact=model_evaluation_artifact
-                )
-            
+            )
 
         except Exception as e:
             raise CustomException(e, sys)

@@ -1,12 +1,12 @@
 import os
 import sys
-from src.diamond.exception import CustomException
+from pandas import DataFrame
 from src.diamond.logger import logging
+from src.diamond.exception import CustomException
+from sklearn.model_selection import train_test_split
 from src.diamond.entity.config import DataIngestionConfig
 from src.diamond.entity.artifact import DataIngestionArtifact
 from src.diamond.data_ascess.diamond_data_access import GetDiamondData
-from pandas import DataFrame
-from sklearn.model_selection import train_test_split
 
 
 class DataIngestion:

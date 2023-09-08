@@ -1,8 +1,8 @@
 import pymongo
 import certifi
-import os
+import os,sys
 from src.diamond.constants.env_variable import EnvironmentVariable
-
+from src.diamond.exception import CustomException
 # Import database_name and collection_name form constant package
 from src.diamond.constants.database_name import DATABASE_NAME, COLLECTION_NAME
 
@@ -21,4 +21,4 @@ class MongodbClient:
             self.database = self.client[database_name]
             self.database_name = database_name
         except Exception as e:
-            raise e
+            raise CustomException(sys,e)

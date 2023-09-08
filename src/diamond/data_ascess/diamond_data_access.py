@@ -31,6 +31,7 @@ class GetDiamondData:
                 collection = self.mongodb_client.database[collection_name]
             else:
                 collection = self.mongodb_client[database_name][collection_name]
+                
             df = pd.DataFrame(list(collection.find()))
 
             if "_id" in df.columns.to_list():

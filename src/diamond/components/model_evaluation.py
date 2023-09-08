@@ -64,7 +64,7 @@ class ModelEvaluation:
             latest_metric = get_regression_score(y_true, y_latest_pred)
 
             improved_accuracy = trained_metric.accuracy_score-latest_metric.accuracy_score
-            if self.model_eval_config.change_threshold < improved_accuracy:
+            if self.model_evaluation_config.change_threshold < improved_accuracy:
                 #0.02 < 0.03
                 is_model_accepted=True
             else:
@@ -82,7 +82,7 @@ class ModelEvaluation:
             model_eval_report = model_evaluation_artifact.__dict__
 
             #save the report
-            write_yaml_file(file_path=self.model_eval_config.report_file_path, content=model_eval_report)
+            write_yaml_file(file_path=self.model_evaluation_config.report_file_path, content=model_eval_report)
             logging.info(f"Model evaluation artifact: {model_evaluation_artifact}")
             return model_evaluation_artifact
             
