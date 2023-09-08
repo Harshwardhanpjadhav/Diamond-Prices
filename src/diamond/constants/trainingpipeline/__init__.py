@@ -1,5 +1,5 @@
 import os
-
+SAVED_MODEL_DIR =os.path.join("saved_models")
 # Target column name form dataset
 TAREGT_COLUMN_NAME: str = 'price'
 # Name of the pipeline
@@ -54,4 +54,14 @@ MODEL_TRAINER_EXPECTED_ACCURACY:float= 0.7
 
 
 
+"""
+Model Trainer ralated constant start with MODE TRAINER VAR NAME
+"""
+MODEL_EVALUATION_DIR_NAME: str = "model_evaluation"
+MODEL_EVALUATION_CHANGED_THRESHOLD_SCORE: float = 0.02
+MODEL_EVALUATION_REPORT_NAME= "report.yaml"
+
+
+MODEL_PUSHER_DIR_NAME = "model_pusher"
+MODEL_PUSHER_SAVED_MODEL_DIR = SAVED_MODEL_DIR
 

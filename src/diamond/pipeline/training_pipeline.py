@@ -5,9 +5,11 @@ from src.diamond.exception import CustomException
 from src.diamond.components.data_ingestion import DataIngestion
 from src.diamond.components.data_validation import DataValidation
 from src.diamond.components.data_transformation import DataTransformation
+from src.diamond.components.model_evaluation import ModelEvaluation
+from src.diamond.components.model_pusher import ModelPusher
 from src.diamond.components.model_trainer import ModelTrainer
-from src.diamond.entity.artifact import DataIngestionArtifact, DataValidationArtifact, DataTransformationArtifact, ModelTrainerArtifact
-from src.diamond.entity.config import TrainingPipelineConfig, DataIngestionConfig, DataValidationConfig, DataTransformationConfig, ModelTrainerConfig
+from src.diamond.entity.artifact import DataIngestionArtifact, DataValidationArtifact, DataTransformationArtifact, ModelTrainerArtifact,ModelEvaluationArtifact,ModelPusherArtifact
+from src.diamond.entity.config import TrainingPipelineConfig, DataIngestionConfig, DataValidationConfig, DataTransformationConfig, ModelTrainerConfig,ModelEvaluationConfig,ModelPusherConfig
 
 
 class TrainingPipeline:
@@ -28,6 +30,12 @@ class TrainingPipeline:
             training_pipeline_config=training_pipeline_config)
 
         self.model_trainer_config = ModelTrainerConfig(
+            training_pipeline_config=training_pipeline_config)
+        
+        self.model_evaluation_config = ModelEvaluationConfig(
+             training_pipeline_config=training_pipeline_config)
+        
+        self.model_pusher_config = ModelPusherConfig(
             training_pipeline_config=training_pipeline_config)
 
     def start_data_ingestion(self) -> DataIngestionArtifact:
@@ -73,24 +81,36 @@ class TrainingPipeline:
     def start_model_trainer(self, data_transformation_artifact: DataTransformationArtifact) -> ModelTrainerArtifact:
         try:
             logging.info("Started  start_model_trainer >>>>>")
+
             model_trainer = ModelTrainer(
                 data_transformation_artifact,
                 model_trainer_config=self.model_trainer_config)
-            logging.info("end  start_model_trainer >>>>>")
             model_trainer_artifact = model_trainer.initiate_model_training()
             return model_trainer_artifact
         except Exception as e:
             raise CustomException(e, sys)
 
-    def start_model_evaluation(self):
+    def start_model_evaluation(self,model_trainer_artifact:ModelTrainerArtifact,data_validation_artifact:DataValidationArtifact)->ModelEvaluationArtifact:
         try:
-            pass
+            logging.info("Started  start_model_evaluation >>>>>")
+
+            model_evaluation = ModelEvaluation(
+                model_trainer_artifact,
+                data_validation_artifact,
+                model_evaluation_config=self.model_evaluation_config
+                )
+            model_evaluation_artifact = model_evaluation.initiate_model_evaluation()
+            return model_evaluation_artifact
         except Exception as e:
             raise CustomException(e, sys)
 
-    def start_model_pusher(self):
+    def start_model_pusher(self,model_eval_artifact:ModelEvaluationArtifact)->ModelPusherArtifact:
         try:
-            pass
+            model_pusher = ModelPusher(self.model_pusher_config,
+                                        model_eval_artifact)
+            model_pusher_artifact = model_pusher.initiate_model_pusher()
+
+            return model_pusher_artifact
         except Exception as e:
             raise CustomException(e, sys)
 
@@ -106,6 +126,16 @@ class TrainingPipeline:
 
             model_trainer_artifact = self.start_model_trainer(
                 data_transformation_artifact=data_transformation_artifact)
+            
+            model_evaluation_artifact = self.start_model_evaluation(
+                model_trainer_artifact=model_trainer_artifact,
+                data_validation_artifact=data_validation_artifact
+                )
+            
+            model_pusher_artifact = self.start_model_pusher(
+                model_eval_artifact=model_evaluation_artifact
+                )
+            
 
         except Exception as e:
             raise CustomException(e, sys)

@@ -5,7 +5,7 @@ from src.diamond.exception import CustomException
 from src.diamond.entity.config import ModelTrainerConfig
 from src.diamond.constants import trainingpipeline as tp
 from src.diamond.ml.metrics import get_regression_score
-from src.diamond.utils.main_util import load_numpy_array_data,load_object,save_preprocessing_object
+from src.diamond.utils.main_util import load_numpy_array_data,load_object,save_object
 from src.diamond.ml.estimator import diamond
 from src.diamond.entity.artifact import ModelTrainerArtifact,DataTransformationArtifact
 
@@ -72,7 +72,7 @@ class ModelTrainer:
 
             diamond_model = diamond(preprocessor=preprocessor,model=model)
 
-            save_preprocessing_object(file_path=self.model_trainer_config.trained_model_file_path,obj=diamond_model)
+            save_object(file_path=self.model_trainer_config.trained_model_file_path,obj=diamond_model)
 
 
             model_trainer_artifact = ModelTrainerArtifact(
