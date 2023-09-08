@@ -65,3 +65,15 @@ class DataTransformationConfig:
             self.data_transformation_dir, tp.TEST_FILE_NAME.replace("csv", "npy"),)
         self.data_transformation_object_file_path: str = os.path.join(
             self.data_transformation_dir, tp.DATA_TRASNFORMATION_TRANSFORMED_DATA_OBJECT_DIR, tp.PREPROCESSING_PIPELINE_OBJECT)
+        
+
+class ModelTrainerConfig:
+    def __init__(self, training_pipeline_config: tp):
+
+        self.model_trainer_dir: str = os.path.join(
+            training_pipeline_config.artifact_dir, tp.MODEL_TRAINER_DIR_NAME)
+        
+        self.trained_model_file_path: str = os.path.join(
+            self.model_trainer_dir, tp.MODEL_TRAINER_TRAINED_MODEL_DIR,tp.MODEL_FILE_NAME)
+        
+        self.expected_accuracy: float = tp.MODEL_TRAINER_EXPECTED_ACCURACY 

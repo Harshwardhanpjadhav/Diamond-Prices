@@ -5,8 +5,9 @@ from src.diamond.exception import CustomException
 from src.diamond.components.data_ingestion import DataIngestion
 from src.diamond.components.data_validation import DataValidation
 from src.diamond.components.data_transformation import DataTransformation
-from src.diamond.entity.artifact import DataIngestionArtifact, DataValidationArtifact,DataTransformationArtifact
-from src.diamond.entity.config import TrainingPipelineConfig, DataIngestionConfig, DataValidationConfig,DataTransformationConfig
+from src.diamond.components.model_trainer import ModelTrainer
+from src.diamond.entity.artifact import DataIngestionArtifact, DataValidationArtifact,DataTransformationArtifact,ModelTrainerArtifact
+from src.diamond.entity.config import TrainingPipelineConfig, DataIngestionConfig, DataValidationConfig,DataTransformationConfig,ModelTrainerConfig
 
 
 class TrainingPipeline:
@@ -16,6 +17,7 @@ class TrainingPipeline:
 
     def __init__(self):
         training_pipeline_config = TrainingPipelineConfig()
+
         self.data_ingestion_config = DataIngestionConfig(
             training_pipeline_config=training_pipeline_config)
         
@@ -24,6 +26,9 @@ class TrainingPipeline:
         
         self.data_transformation_config = DataTransformationConfig(
         training_pipeline_config=training_pipeline_config)
+
+        self.model_trainer_config = ModelTrainerConfig(
+            training_pipeline_config=training_pipeline_config)
         
 
     def start_data_ingestion(self) -> DataIngestionArtifact:
@@ -66,9 +71,15 @@ class TrainingPipeline:
         except Exception as e:
             raise CustomException(e, sys)
 
-    def start_model_trainer(self):
+    def start_model_trainer(self,data_transformation_artifact:DataTransformationArtifact)->ModelTrainerArtifact:
         try:
-            pass
+            logging.info("Started  start_model_trainer >>>>>")
+            model_trainer = ModelTrainer(
+                data_transformation_artifact,
+                model_trainer_config=self.model_trainer_config)
+            logging.info("end  start_model_trainer >>>>>")
+            model_trainer_artifact =  model_trainer.initiate_model_training()
+            return model_trainer_artifact
         except Exception as e:
             raise CustomException(e, sys)
 
@@ -93,6 +104,9 @@ class TrainingPipeline:
             
             data_transformation_artifact = self.start_data_transformation(
                 data_validation_artifact=data_validation_artifact)
+            
+            model_trainer_artifact = self.start_model_trainer(
+                data_transformation_artifact=data_transformation_artifact)
             
         except Exception as e:
             raise CustomException(e, sys)
