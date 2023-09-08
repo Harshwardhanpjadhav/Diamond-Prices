@@ -15,7 +15,6 @@ def read_yaml_file(file_path: str) -> dict:
     except Exception as e:
         raise CustomException(e, sys)
 
-
 def write_yaml_file(file_path: str, content: object, replace: bool = False) -> None:
     try:
         if replace:
@@ -29,7 +28,6 @@ def write_yaml_file(file_path: str, content: object, replace: bool = False) -> N
     except Exception as e:
         raise CustomException(e, sys)
 
-
 def numerical_col(df: pd.DataFrame) -> pd.DataFrame:
     try:
         num_col = [
@@ -40,7 +38,6 @@ def numerical_col(df: pd.DataFrame) -> pd.DataFrame:
     except Exception as e:
         raise CustomException(sys,e)
 
-
 def categorical_col(df: pd.DataFrame) -> pd.DataFrame:
     try:
         cat_col = [
@@ -50,18 +47,6 @@ def categorical_col(df: pd.DataFrame) -> pd.DataFrame:
         return df
     except Exception as e:
         raise CustomException(sys,e)
-
-
-
-def save_preprocessing_object(file_path:str,obj:object)->None:
-    try:
-        os.makedirs(os.path.dirname(file_path),exist_ok=True)
-        with open(file_path,'wb') as file_obj:
-            dill.dump(obj,file_obj)
-
-    except Exception as e:
-        raise CustomException(sys,e)
-    
 
 def save_numpy_array_data(file_path: str, array: np.array):
     """
@@ -88,6 +73,15 @@ def load_numpy_array_data(file_path: str) -> np.array:
             return np.load(file_obj)
     except Exception as e:
         raise CustomException(e, sys) from e
+    
+def save_object(file_path:str,obj:object)->None:
+    try:
+        os.makedirs(os.path.dirname(file_path),exist_ok=True)
+        with open(file_path,'wb') as file_obj:
+            dill.dump(obj,file_obj)
+
+    except Exception as e:
+        raise CustomException(sys,e)
     
 def load_object(file_path: str, ) -> object:
     try:

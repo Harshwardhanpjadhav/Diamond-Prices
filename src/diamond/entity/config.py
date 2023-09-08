@@ -16,18 +16,13 @@ class DataIngestionConfig:
     def __init__(self, training_pipeline_config: TrainingPipelineConfig):
         self.data_ingestion_dir = os.path.join(
             training_pipeline_config.artifact_dir, tp.DATA_INGESTION_DIR_NAME)
-
         self.feature_store_file_path = os.path.join(
             self.data_ingestion_dir, tp.DATA_INGESTION_FEATURE_STORE_DIR, tp.FILE_NAME)
-
         self.training_file_path = os.path.join(
             self.data_ingestion_dir, tp.DATA_INGESTION_INGESTED_DIR, tp.TRAIN_FILE_NAME)
-
         self.testing_file_path = os.path.join(
             self.data_ingestion_dir, tp.DATA_INGESTION_INGESTED_DIR, tp.TEST_FILE_NAME)
-
         self.train_test_split_ratio: float = tp.DATA_INGESTION_TRAIN_TEST_SPLIT_RATIO
-
         self.collection_name: str = tp.DATA_INGESTION_COLLECTION_NAME
 
 
@@ -65,15 +60,12 @@ class DataTransformationConfig:
             self.data_transformation_dir, tp.TEST_FILE_NAME.replace("csv", "npy"),)
         self.data_transformation_object_file_path: str = os.path.join(
             self.data_transformation_dir, tp.DATA_TRASNFORMATION_TRANSFORMED_DATA_OBJECT_DIR, tp.PREPROCESSING_PIPELINE_OBJECT)
-        
+
 
 class ModelTrainerConfig:
     def __init__(self, training_pipeline_config: tp):
-
         self.model_trainer_dir: str = os.path.join(
             training_pipeline_config.artifact_dir, tp.MODEL_TRAINER_DIR_NAME)
-        
         self.trained_model_file_path: str = os.path.join(
-            self.model_trainer_dir, tp.MODEL_TRAINER_TRAINED_MODEL_DIR,tp.MODEL_FILE_NAME)
-        
-        self.expected_accuracy: float = tp.MODEL_TRAINER_EXPECTED_ACCURACY 
+            self.model_trainer_dir, tp.MODEL_TRAINER_TRAINED_MODEL_DIR, tp.MODEL_FILE_NAME)
+        self.expected_accuracy: float = tp.MODEL_TRAINER_EXPECTED_ACCURACY
