@@ -17,6 +17,8 @@ class TrainingPipeline:
     This class is used to create the training pipeline object
     '''
 
+    is_pipeline_running = False
+
     def __init__(self):
         training_pipeline_config = TrainingPipelineConfig()
 
@@ -117,6 +119,7 @@ class TrainingPipeline:
 
     def run_pipeline(self):
         try:
+            TrainingPipeline.is_pipeline_running =True
             data_ingestion_artifact: DataIngestionArtifact = self.start_data_ingestion()
 
             data_validation_artifact = self.start_data_validation(
@@ -137,5 +140,6 @@ class TrainingPipeline:
                 model_eval_artifact=model_evaluation_artifact
             )
 
+            TrainingPipeline.is_pipeline_running =False
         except Exception as e:
             raise CustomException(e, sys)

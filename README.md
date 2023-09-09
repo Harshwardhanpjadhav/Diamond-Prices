@@ -42,3 +42,10 @@ By building a diamond price prediction model, we can provide valuable insights t
 Feel free to expand upon this outline and add more details as needed for your specific project.
 
 Happy coding!
+
+
+dvc stage add -n data_ingestion \
+                -p data_ingestion.seed,data_ingestion.split \
+                -d src/data_ingestion.py -d data/data.xml \
+                -o data/prepared \
+                python src/diamond/data_ingestion.py data/data.xml
